@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yugeswaran D | UI/UX & Frontend</title>
+    <meta name="description" content="Portfolio of a creative UI/UX Designer and Frontend Developer">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Times New Roman"', 'serif'],
+                    },
+                    colors: {
+                        dark: '#0a0a0a',
+                        primary: '#6366f1', // Indigo
+                        secondary: '#ec4899', // Pink
+                        surface: '#171717',
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'float': 'float 3s ease-in-out infinite',
+                        'spin-slow': 'spin 3s linear infinite',
+                        'spin-reverse': 'spinReverse 2s linear infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        spinReverse: {
+                            'from': { transform: 'rotate(360deg)' },
+                            'to': { transform: 'rotate(0deg)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+            cursor: none;
+            font-family: 'Times New Roman', Times, serif;
+            font-style: italic;
+        }
+
+        /* Custom Cursor */
+        .cursor-dot,
+        .cursor-outline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: white;
+        }
+
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+
+        body.hovering .cursor-outline {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: transparent;
+            backdrop-filter: blur(2px);
+        }
+
+        /* Glassmorphism Utilities */
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* --- NAVIGATION STYLES --- */
+        .nav-hud {
+            background: rgba(15, 15, 15, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 
+                0 10px 30px -10px rgba(0, 0, 0, 0.8),
+                0 0 20px -5px rgba(99, 102, 241, 0.15); 
+        }
+
+        .nav-pill-backdrop {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 80%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 999px;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0; 
+        }
+        
+        .nav-link-item {
+            position: relative;
+            z-index: 10;
+            transition: color 0.3s;
+        }
+        
+        .nav-link-item.active {
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        /* Text Gradients */
+        .text-gradient {
+            background: linear-gradient(to right, #6366f1, #ec4899, #6366f1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 200% auto;
+            animation: gradientMove 5s linear infinite;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project-card:hover .project-img {
+            transform: scale(1.05);
+        }
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .cursor-dot, .cursor-outline {
+                display: none;
+            }
+            body {
+                cursor: auto;
+            }
+        }
+        
+        /* Container adjustment for 1920x1080 Resolution */
+        .container-constrained {
+            width: 100%;
+            max-width: 1600px; 
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 2rem; 
+            padding-right: 2rem;
+        }
+    </style>
+</head>
+<body class="antialiased overflow-hidden" id="main-body">
+
+    <!-- Preloader Animation -->
+    <div id="preloader" class="fixed inset-0 bg-[#050505] z-[10000] flex flex-col items-center justify-center transition-opacity duration-700">
+        <!-- Orbital Loader -->
+        <div class="relative w-40 h-40 flex items-center justify-center mb-8">
+            <!-- Inner pulsing core -->
+            <div class="absolute w-20 h-20 bg-gradient-to-tr from-primary to-secondary rounded-full blur-lg animate-pulse opacity-60"></div>
+            <div class="absolute w-16 h-16 bg-[#0a0a0a] rounded-full z-10 flex items-center justify-center border border-white/10 shadow-2xl shadow-primary/20">
+                 <span class="text-white font-serif italic font-bold text-lg tracking-tight">YD</span>
+            </div>
+            
+            <!-- Outer Ring 1 (Indigo) -->
+            <div class="absolute w-full h-full rounded-full border border-transparent border-t-primary/80 border-l-primary/30 animate-spin-slow shadow-[0_0_15px_rgba(99,102,241,0.3)]"></div>
+            
+            <!-- Outer Ring 2 (Pink - Reverse) -->
+            <div class="absolute w-28 h-28 rounded-full border border-transparent border-b-secondary/80 border-r-secondary/30 animate-spin-reverse shadow-[0_0_15px_rgba(236,72,153,0.3)]"></div>
+            
+            <!-- Decorative Particles -->
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-white rounded-full animate-ping"></div>
+        </div>
+        
+        <!-- Loading Text with Staggered Dots -->
+        <div class="flex flex-col items-center gap-3">
+            <div class="text-white/90 font-serif italic text-2xl tracking-wider relative">
+                Yugeswaran<span class="text-primary">.</span>
+            </div>
+            <div class="flex gap-2 mt-2">
+                <div class="w-2 h-2 bg-primary rounded-full animate-bounce" style="animation-delay: 0s"></div>
+                <div class="w-2 h-2 bg-white rounded-full animate-bounce" style="animation-delay: 0.15s"></div>
+                <div class="w-2 h-2 bg-secondary rounded-full animate-bounce" style="animation-delay: 0.3s"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Cursor Elements -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Background Blobs (Ambient Light) -->
+    <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full mix-blend-screen filter blur-[100px] animate-blob"></div>
+        <div class="absolute top-0 right-1/4 w-96 h-96 bg-secondary/20 rounded-full mix-blend-screen filter blur-[100px] animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-32 left-1/3 w-96 h-96 bg-purple-500/20 rounded-full mix-blend-screen filter blur-[100px] animate-blob animation-delay-4000"></div>
+    </div>
+
+    <!-- Scroll Control Widget -->
+    <div class="fixed bottom-8 right-8 z-50 flex flex-col gap-3">
+        <button id="scroll-up" class="w-12 h-12 rounded-full glass flex items-center justify-center text-white hover:bg-primary hover:scale-110 hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 opacity-0 translate-y-4 pointer-events-none hoverable" aria-label="Scroll Up">
+            <i class="fa-solid fa-arrow-up"></i>
+        </button>
+        <button id="scroll-down" class="w-12 h-12 rounded-full glass flex items-center justify-center text-white hover:bg-secondary hover:scale-110 hover:shadow-lg hover:shadow-secondary/30 transition-all duration-300 animate-bounce hoverable" aria-label="Scroll Down">
+            <i class="fa-solid fa-arrow-down"></i>
+        </button>
+    </div>
+
+    <!-- Futuristic HUD Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-50 pointer-events-none flex justify-center">
+        
+        <!-- Animated HUD Wrapper -->
+        <div id="navbar" class="pointer-events-auto transition-all duration-500 mt-6 w-fit max-w-[95%]">
+            <div class="nav-hud px-4 py-3 rounded-full flex items-center gap-6 md:gap-10">
+                
+                <!-- Logo Segment -->
+                <a href="#" class="pl-4 pr-2 text-2xl font-bold tracking-tighter hoverable group flex items-center gap-2">
+                    <div class="w-9 h-9 bg-gradient-to-tr from-primary to-secondary rounded-lg flex items-center justify-center text-white text-sm font-serif italic shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform">YD</div>
+                    <span class="hidden md:inline">YUGESWARAN<span class="text-primary">.</span></span>
+                </a>
+
+                <!-- Center Links Segment (Desktop) -->
+                <div id="nav-links-container" class="hidden md:flex bg-black/20 rounded-full px-3 py-2 relative items-center border border-white/5">
+                    <div id="nav-backdrop" class="nav-pill-backdrop w-0 left-0"></div>
+
+                    <!-- Increased Font Size for Nav Links -->
+                    <a href="#home" class="nav-link-item px-6 py-2 text-base md:text-lg font-medium text-gray-400 hover:text-white hoverable" data-target="home">Home</a>
+                    <a href="#projects" class="nav-link-item px-6 py-2 text-base md:text-lg font-medium text-gray-400 hover:text-white hoverable" data-target="projects">Projects</a>
+                    <a href="#skills" class="nav-link-item px-6 py-2 text-base md:text-lg font-medium text-gray-400 hover:text-white hoverable" data-target="skills">Skills</a>
+                    <a href="#about" class="nav-link-item px-6 py-2 text-base md:text-lg font-medium text-gray-400 hover:text-white hoverable" data-target="about">About</a>
+                </div>
+
+                <!-- CTA Segment -->
+                <a href="#contact" class="pr-1 pl-1">
+                    <div class="px-8 py-3 rounded-full bg-white text-black font-bold text-sm uppercase tracking-widest hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-white transition-all duration-300 hoverable shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(99,102,241,0.4)] flex items-center gap-2">
+                        <span>Let's Talk</span>
+                        <i class="fa-solid fa-arrow-right -rotate-45 group-hover:rotate-0 transition-transform"></i>
+                    </div>
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-white hoverable pr-2" id="mobile-menu-btn">
+                    <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">
+                        <i class="fa-solid fa-bars-staggered text-xl"></i>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="md:hidden fixed top-0 left-0 w-screen h-screen bg-black/95 z-40 transform translate-x-full transition-transform duration-300 flex flex-col justify-center items-center space-y-8 rounded-none pointer-events-auto">
+            <button class="absolute top-8 right-8 text-white text-2xl" id="close-menu-btn">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <a href="#home" class="text-3xl font-thin italic mobile-link hover:text-primary transition-colors">Home</a>
+            <a href="#projects" class="text-3xl font-thin italic mobile-link hover:text-primary transition-colors">Projects</a>
+            <a href="#skills" class="text-3xl font-thin italic mobile-link hover:text-primary transition-colors">Skills</a>
+            <a href="#about" class="text-3xl font-thin italic mobile-link hover:text-primary transition-colors">About</a>
+            <a href="#contact" class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary mobile-link">Let's Talk</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-28 relative section-scroll">
+        <div class="container-constrained grid md:grid-cols-2 gap-16 items-center">
+            <div class="order-2 md:order-1">
+                <div class="inline-block px-5 py-2 rounded-full border border-white/10 bg-white/5 text-base font-medium text-gray-300 mb-8 reveal">
+                    <span class="w-2.5 h-2.5 bg-green-500 rounded-full inline-block mr-3"></span> Available for freelance
+                </div>
+                <h1 class="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-[0.9] mb-8 reveal" style="transition-delay: 100ms;">
+                    Hi, I'm <br>
+                    <span class="text-gradient">Yugesh</span>
+                </h1>
+                <p class="text-gray-400 text-xl md:text-2xl lg:text-3xl leading-relaxed mb-10 max-w-2xl reveal" style="transition-delay: 200ms;">
+                    I blend aesthetic UI design with robust frontend development to build immersive web applications.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-5 reveal" style="transition-delay: 300ms;">
+                    <a href="#projects" class="px-10 py-5 bg-white text-black rounded-full font-bold text-lg text-center hover:bg-gray-200 transition-colors hoverable">
+                        View Projects
+                    </a>
+                    <a href="#contact" class="px-10 py-5 border border-white/20 rounded-full font-bold text-lg text-center hover:bg-white/10 transition-colors hoverable">
+                        Contact Me
+                    </a>
+                </div>
+                
+                <div class="mt-16 flex items-center gap-8 text-gray-400 reveal" style="transition-delay: 400ms;">
+                    <a href="https://github.com/BlackDevil6010" target="_blank" class="hover:text-white transition-colors hoverable"><i class="fa-brands fa-github text-4xl"></i></a>
+                    <a href="https://www.linkedin.com/in/yugeswaran-d-37a65b28b/" target="_blank" class="hover:text-white transition-colors hoverable"><i class="fa-brands fa-linkedin text-4xl"></i></a>
+                    <a href="#" class="hover:text-white transition-colors hoverable"><i class="fa-brands fa-dribbble text-4xl"></i></a>
+                </div>
+            </div>
+            
+            <div class="order-1 md:order-2 relative reveal" style="transition-delay: 200ms;">
+                <div class="relative w-full aspect-square max-w-lg xl:max-w-2xl mx-auto">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-primary to-secondary rounded-full opacity-20 blur-3xl animate-pulse"></div>
+                    <!-- Added onerror fallback -->
+                    <img src="a.jpeg"  alt="Yugesh Profile" class="relative w-full h-full object-cover rounded-2xl rotate-3 hover:rotate-0 transition-transform duration-700 border border-white/10 shadow-2xl shadow-primary/20">
+                    
+                    <div class="absolute -bottom-8 -left-8 glass p-6 rounded-2xl border border-white/10 shadow-xl animate-bounce" style="animation-duration: 3s;">
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 bg-blue-500/20 rounded-full flex items-center justify-center text-blue-400 text-xl">
+                                <i class="fa-solid fa-code"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-400">Clean Code</p>
+                                <p class="text-lg font-bold">React & Tailwind</p>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="absolute top-12 -right-8 glass p-6 rounded-2xl border border-white/10 shadow-xl animate-bounce" style="animation-duration: 4s;">
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 bg-pink-500/20 rounded-full flex items-center justify-center text-pink-400 text-xl">
+                                <i class="fa-solid fa-pen-nib"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-400">Design</p>
+                                <p class="text-lg font-bold">Figma & UI</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics / Logo Strip -->
+    <div class="border-y border-white/5 bg-black/20 backdrop-blur-sm py-16">
+        <div class="container-constrained flex flex-wrap justify-center md:justify-between gap-12 items-center opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+            <i class="fa-brands fa-react text-6xl hoverable"></i>
+            <i class="fa-brands fa-js text-6xl hoverable"></i>
+            <i class="fa-brands fa-figma text-6xl hoverable"></i>
+            <i class="fa-brands fa-html5 text-6xl hoverable"></i>
+            <i class="fa-brands fa-css3-alt text-6xl hoverable"></i>
+            <i class="fa-brands fa-git-alt text-6xl hoverable"></i>
+        </div>
+    </div>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-32 bg-neutral-900/30 section-scroll">
+        <div class="container-constrained">
+            <div class="flex justify-between items-end mb-20 reveal">
+                <div>
+                    <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">Selected Projects</h2>
+                    <p class="text-gray-400 text-xl">Projects that defined my career path.</p>
+                </div>
+                <a href="#" class="hidden md:block text-lg font-bold border-b border-white/30 pb-1 hover:border-white hover:text-white transition-all hoverable">View All Projects</a>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12">
+                
+                <!-- Project 1: Apex Bikes -->
+                <a href="https://astounding-chebakia-d411ee.netlify.app/" target="_blank" class="group project-card relative rounded-3xl overflow-hidden cursor-pointer hoverable reveal block">
+                    <div class="aspect-[4/3] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1576435728678-68d0fbf94e91?q=80&w=2000&auto=format&fit=crop" alt="Apex Bikes" class="project-img w-full h-full object-cover transition-transform duration-700">
+                    </div>
+                    <div class="project-overlay absolute inset-0 bg-black/80 opacity-0 transition-opacity duration-300 flex flex-col justify-end p-12">
+                        <h3 class="text-3xl font-bold mb-3 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Apex Bikes</h3>
+                        <p class="text-gray-300 text-lg mb-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">High-performance landing page for premium cycles.</p>
+                        <div class="flex gap-3 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">
+                            <span class="text-sm border border-white/20 px-4 py-1.5 rounded-full">HTML/CSS</span>
+                            <span class="text-sm border border-white/20 px-4 py-1.5 rounded-full">Responsive</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 2: Frontend Experiment -->
+                <a href="https://codepen.io/YugeswaranD/full/jEqGEap" target="_blank" class="group project-card relative rounded-3xl overflow-hidden cursor-pointer hoverable reveal block">
+                    <div class="aspect-[4/3] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1605379399642-870262d3d051?q=80&w=2000&auto=format&fit=crop" alt="CodePen Project" class="project-img w-full h-full object-cover transition-transform duration-700">
+                    </div>
+                    <div class="project-overlay absolute inset-0 bg-black/80 opacity-0 transition-opacity duration-300 flex flex-col justify-end p-12">
+                        <h3 class="text-3xl font-bold mb-3 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Frontend Experiment</h3>
+                        <p class="text-gray-300 text-lg mb-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">Interactive prototype and visual design experiment.</p>
+                        <div class="flex gap-3 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">
+                            <span class="text-sm border border-white/20 px-4 py-1.5 rounded-full">CodePen</span>
+                            <span class="text-sm border border-white/20 px-4 py-1.5 rounded-full">JavaScript</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 3: Social Media Kit -->
+                <div class="group project-card relative rounded-3xl overflow-hidden cursor-pointer hoverable reveal">
+                    <div class="aspect-[4/3] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=2000&auto=format&fit=crop" alt="Project 3" class="project-img w-full h-full object-cover transition-transform duration-700">
+                    </div>
+                    <div class="project-overlay absolute inset-0 bg-black/80 opacity-0 transition-opacity duration-300 flex flex-col justify-end p-12">
+                        <h3 class="text-3xl font-bold mb-3 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Social Media Kit</h3>
+                        <p class="text-gray-300 text-lg mb-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">Dark mode interface design system.</p>
+                        <div class="flex gap-3 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">
+                            <span class="text-sm border border-white/20 px-4 py-1.5 rounded-full">Figma</span>
+                            <span class="text-sm border border-white/20 px-4 py-1.5 rounded-full">UI/UX</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4: Analytics SaaS -->
+                <div class="group project-card relative rounded-3xl overflow-hidden cursor-pointer hoverable reveal">
+                    <div class="aspect-[4/3] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2000&auto=format&fit=crop" alt="Project 4" class="project-img w-full h-full object-cover transition-transform duration-700">
+                    </div>
+                    <div class="project-overlay absolute inset-0 bg-black/80 opacity-0 transition-opacity duration-300 flex flex-col justify-end p-12">
+                        <h3 class="text-3xl font-bold mb-3 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Analytics SaaS</h3>
+                        <p class="text-gray-300 text-lg mb-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">B2B marketing platform interface.</p>
+                        <div class="flex gap-3 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">
+                            <span class="text-sm border border-white/20 px-4 py-1.5 rounded-full">React</span>
+                            <span class="text-sm border border-white/20 px-4 py-1.5 rounded-full">Node.js</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-32 relative section-scroll">
+        <div class="container-constrained">
+            <div class="mb-20 text-center reveal">
+                <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">My Skills</h2>
+                <p class="text-gray-400 text-xl max-w-2xl mx-auto">A blend of creative design and technical engineering.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-10">
+                <!-- Skill Card 1 -->
+                <div class="glass p-10 rounded-3xl hover:bg-white/10 transition-all duration-500 hoverable reveal group hover:-translate-y-4 hover:shadow-[0_20px_40px_-15px_rgba(99,102,241,0.3)] active:scale-95 cursor-pointer">
+                    <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary text-3xl mb-8 group-hover:scale-110 transition-transform duration-500 group-hover:animate-float group-hover:bg-primary group-hover:text-white">
+                        <i class="fa-solid fa-bezier-curve"></i>
+                    </div>
+                    <h3 class="text-3xl font-bold mb-6 group-hover:text-primary transition-colors">UI/UX Design</h3>
+                    <ul class="space-y-4 text-gray-400 text-base">
+                        <li class="flex items-center gap-3 group-hover:text-gray-200 transition-colors"><i class="fa-solid fa-check text-primary text-sm"></i> User Research & Personas</li>
+                        <li class="flex items-center gap-3 group-hover:text-gray-200 transition-colors"><i class="fa-solid fa-check text-primary text-sm"></i> Wireframing & Prototyping</li>
+                        <li class="flex items-center gap-3 group-hover:text-gray-200 transition-colors"><i class="fa-solid fa-check text-primary text-sm"></i> Design Systems (Figma)</li>
+                        <li class="flex items-center gap-3 group-hover:text-gray-200 transition-colors"><i class="fa-solid fa-check text-primary text-sm"></i> Interaction Design</li>
+                    </ul>
+                </div>
+
+                <!-- Skill Card 2 -->
+                <div class="glass p-10 rounded-3xl hover:bg-white/10 transition-all duration-500 hoverable reveal group hover:-translate-y-4 hover:shadow-[0_20px_40px_-15px_rgba(236,72,153,0.3)] active:scale-95 cursor-pointer" style="transition-delay: 100ms;">
+                    <div class="w-16 h-16 bg-secondary/10 rounded-2xl flex items-center justify-center text-secondary text-3xl mb-8 group-hover:scale-110 transition-transform duration-500 group-hover:animate-float group-hover:bg-secondary group-hover:text-white">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <h3 class="text-3xl font-bold mb-6 group-hover:text-secondary transition-colors">Frontend Dev</h3>
+                    <ul class="space-y-4 text-gray-400 text-base">
+                        <li class="flex items-center gap-3 group-hover:text-gray-200 transition-colors"><i class="fa-solid fa-check text-secondary text-sm"></i> React, Vue, & Angular</li>
+                        <li class="flex items-center gap-3 group-hover:text-gray-200 transition-colors"><i class="fa-solid fa-check text-secondary text-sm"></i> Tailwind CSS & SASS</li>
+                        <li class="flex items-center gap-3 group-hover:text-gray-200 transition-colors"><i class="fa-solid fa-check text-secondary text-sm"></i> GSAP & Three.js Animations</li>
+                        <li class="flex items-center gap-3 group-hover:text-gray-200 transition-colors"><i class="fa-solid fa-check text-secondary text-sm"></i> Responsive & Accessible</li>
+                    </ul>
+                </div>
+
+                <!-- Skill Card 3 -->
+                <div class="glass p-10 rounded-3xl hover:bg-white/10 transition-all duration-500 hoverable reveal group hover:-translate-y-4 hover:shadow-[0_20px_40px_-15px_rgba(168,85,247,0.3)] active:scale-95 cursor-pointer" style="transition-delay: 200ms;">
+                    <div class="w-16 h-16 bg-purple-500/10 rounded-2xl flex items-center justify-center text-purple-400 text-3xl mb-8 group-hover:scale-110 transition-transform duration-500 group-hover:animate-float group-hover:bg-purple-500 group-hover:text-white">
+                        <i class="fa-solid fa-server"></i>
+                    </div>
+                    <h3 class="text-3xl font-bold mb-6 group-hover:text-purple-400 transition-colors">Backend & Tools</h3>
+                    <ul class="space-y-4 text-gray-400 text-base">
+                        <li class="flex items-center gap-3 group-hover:text-gray-200 transition-colors"><i class="fa-solid fa-check text-purple-400 text-sm"></i> Node.js & Express</li>
+                        <li class="flex items-center gap-3 group-hover:text-gray-200 transition-colors"><i class="fa-solid fa-check text-purple-400 text-sm"></i> Firebase & Supabase</li>
+                        <li class="flex items-center gap-3 group-hover:text-gray-200 transition-colors"><i class="fa-solid fa-check text-purple-400 text-sm"></i> Git & CI/CD Pipelines</li>
+                        <li class="flex items-center gap-3 group-hover:text-gray-200 transition-colors"><i class="fa-solid fa-check text-purple-400 text-sm"></i> CMS Integration</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-32 bg-neutral-900/30 section-scroll">
+        <div class="container-constrained">
+            <div class="glass p-12 md:p-20 rounded-[3rem] border border-white/10 relative overflow-hidden reveal">
+                <div class="absolute -top-24 -right-24 w-80 h-80 bg-primary/30 rounded-full filter blur-[100px]"></div>
+                
+                <div class="relative z-10 flex flex-col md:flex-row items-center gap-16">
+                    <div class="md:w-1/2">
+                        <h2 class="text-4xl md:text-6xl font-bold mb-8">About Me</h2>
+                        <div class="space-y-6 text-gray-300 leading-loose text-lg md:text-xl">
+                            <p>
+                                Hello! I'm Yugesh. I started coding when I was 15 and fell in love with the ability to create things from nothing.
+                            </p>
+                            <p>
+                                I believe that a website should not just be functional, but an experience. My workflow involves understanding the core user problem, sketching solutions in Figma, and bringing them to life with clean, maintainable code.
+                            </p>
+                            <p>
+                                Currently exploring the intersection of 3D web technologies and minimal design patterns.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 w-full">
+                         <div class="space-y-8">
+                            <div>
+                                <div class="flex justify-between mb-3">
+                                    <span class="font-medium text-lg">Frontend (React/TS)</span>
+                                    <span class="text-gray-400 text-lg">95%</span>
+                                </div>
+                                <div class="h-3 bg-white/10 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-primary to-secondary w-[95%]"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-3">
+                                    <span class="font-medium text-lg">UI Design (Figma)</span>
+                                    <span class="text-gray-400 text-lg">90%</span>
+                                </div>
+                                <div class="h-3 bg-white/10 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-primary to-secondary w-[90%]"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-3">
+                                    <span class="font-medium text-lg">Backend (Node/Firebase)</span>
+                                    <span class="text-gray-400 text-lg">75%</span>
+                                </div>
+                                <div class="h-3 bg-white/10 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-primary to-secondary w-[75%]"></div>
+                                </div>
+                            </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-32 relative overflow-hidden section-scroll">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[150px] -z-10 pointer-events-none"></div>
+
+        <div class="container-constrained">
+            <div class="grid md:grid-cols-2 gap-20 items-center">
+                <div class="reveal">
+                    <h2 class="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-tight">
+                        Let's work <br> <span class="text-gradient">together.</span>
+                    </h2>
+                    <p class="text-gray-400 text-xl mb-12 max-w-lg">
+                        I'm currently available for freelance projects. Have an idea? Let's discuss how we can bring it to life.
+                    </p>
+                    
+                    <div class="space-y-10 mb-16">
+                        <div class="flex items-center gap-6">
+                            <div class="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center text-primary border border-white/10 backdrop-blur-sm group-hover:border-primary/50 transition-colors">
+                                <i class="fa-regular fa-envelope text-3xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-400 mb-1">Email me at</p>
+                                <a href="mailto:yugeshdhanasekaran@gmail.com" class="text-2xl font-medium hover:text-primary transition-colors hoverable">yugeshdhanasekaran@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-6">
+                            <div class="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center text-secondary border border-white/10 backdrop-blur-sm">
+                                <i class="fa-brands fa-whatsapp text-3xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-400 mb-1">Chat on WhatsApp</p>
+                                <a href="#" class="text-2xl font-medium hover:text-secondary transition-colors hoverable">+91 8754251849</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-5">
+                        <a href="https://github.com/BlackDevil6010" target="_blank" class="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:bg-white hover:text-black transition-all duration-300 hoverable transform hover:-translate-y-1">
+                            <i class="fa-brands fa-github text-2xl"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/yugeswaran-d-37a65b28b/" target="_blank" class="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:bg-[#0077b5] hover:text-white hover:border-[#0077b5] transition-all duration-300 hoverable transform hover:-translate-y-1">
+                            <i class="fa-brands fa-linkedin-in text-2xl"></i>
+                        </a>
+                        <a href="#" class="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:bg-[#ea4c89] hover:text-white hover:border-[#ea4c89] transition-all duration-300 hoverable transform hover:-translate-y-1">
+                            <i class="fa-brands fa-dribbble text-2xl"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="glass p-10 md:p-16 rounded-[3rem] border border-white/10 shadow-2xl relative reveal" style="transition-delay: 200ms;">
+                    <form class="space-y-8" onsubmit="event.preventDefault(); const btn = this.querySelector('button'); const originalContent = btn.innerHTML; btn.innerHTML = 'Message Sent! <i class=\'fa-solid fa-check ml-2\'></i>'; btn.style.background = '#22c55e'; setTimeout(() => { btn.innerHTML = originalContent; btn.style.background = ''; }, 3000);">
+                        <div>
+                            <label class="block text-base text-gray-400 mb-3 font-medium ml-1">Your Name</label>
+                            <input type="text" placeholder="John Doe" class="w-full bg-black/30 border border-white/10 rounded-2xl px-8 py-5 text-lg text-white placeholder-gray-600 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/50 transition-all hoverable">
+                        </div>
+                        <div>
+                            <label class="block text-base text-gray-400 mb-3 font-medium ml-1">Your Email</label>
+                            <input type="email" placeholder="john@example.com" class="w-full bg-black/30 border border-white/10 rounded-2xl px-8 py-5 text-lg text-white placeholder-gray-600 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/50 transition-all hoverable">
+                        </div>
+                        <div>
+                            <label class="block text-base text-gray-400 mb-3 font-medium ml-1">Message</label>
+                            <textarea placeholder="Tell me about your project..." rows="4" class="w-full bg-black/30 border border-white/10 rounded-2xl px-8 py-5 text-lg text-white placeholder-gray-600 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/50 transition-all resize-none hoverable"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full py-5 bg-gradient-to-r from-primary to-secondary rounded-2xl font-bold text-lg text-white shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:scale-[1.02] transition-all duration-300 hoverable">
+                            Send Message <i class="fa-solid fa-paper-plane ml-2"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 py-12 bg-black">
+        <div class="container-constrained flex flex-col md:flex-row justify-between items-center gap-6">
+            <div>
+                <span class="text-2xl font-bold tracking-tight">YUGESWARAN D<span class="text-primary">.</span></span>
+                <p class="text-gray-500 text-sm mt-2">&copy; 2025 Yugeswaran D. All rights reserved.</p>
+            </div>
+            <div class="flex gap-6">
+                <a href="#" class="text-gray-400 hover:text-white transition-colors hoverable">Instagram</a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors hoverable">Twitter</a>
+                <a href="https://www.linkedin.com/in/yugeswaran-d-37a65b28b/" target="_blank" class="text-gray-400 hover:text-white transition-colors hoverable">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- Preloader Logic ---
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            const mainBody = document.getElementById('main-body');
+            
+            setTimeout(() => {
+                preloader.classList.add('opacity-0');
+                // Allow scrolling again after load
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                    mainBody.classList.remove('overflow-hidden');
+                }, 700); // Wait for fade transition
+            }, 1000); // Minimum show time
+        });
+
+        // --- Navbar Sliding Pill Logic ---
+        const navBackdrop = document.getElementById('nav-backdrop');
+        const navLinks = document.querySelectorAll('.nav-link-item');
+
+        function moveBackdrop(element) {
+            const width = element.offsetWidth;
+            const left = element.offsetLeft;
+
+            navBackdrop.style.width = `${width}px`;
+            navBackdrop.style.left = `${left}px`;
+            navBackdrop.style.opacity = '1';
+        }
+
+        navLinks.forEach(link => {
+            link.addEventListener('mouseenter', (e) => {
+                moveBackdrop(e.target);
+                navLinks.forEach(l => l.style.color = 'rgba(156, 163, 175, 1)'); 
+                e.target.style.color = '#fff';
+            });
+        });
+
+        const navContainer = document.getElementById('nav-links-container');
+        if(navContainer) {
+            navContainer.addEventListener('mouseleave', () => {
+                highlightActiveSection();
+            });
+        }
+
+        function highlightActiveSection() {
+            let current = '';
+            const scrollPosition = window.scrollY + 300; 
+
+            document.querySelectorAll('section').forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('text-white');
+                link.classList.add('text-gray-400');
+                link.style.color = ''; 
+                
+                if (link.getAttribute('data-target') === current) {
+                    link.classList.add('text-white');
+                    link.classList.remove('text-gray-400');
+                    moveBackdrop(link);
+                }
+            });
+            
+            if (!current && window.scrollY < 100) {
+                 navBackdrop.style.opacity = '0';
+                 const homeLink = document.querySelector('[data-target="home"]');
+                 if(homeLink) {
+                     navBackdrop.style.width = `${homeLink.offsetWidth}px`;
+                     navBackdrop.style.left = `${homeLink.offsetLeft}px`;
+                 }
+            }
+        }
+
+        window.addEventListener('scroll', highlightActiveSection);
+        setTimeout(highlightActiveSection, 100);
+
+        // --- Mobile Menu Toggle ---
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const closeBtn = document.getElementById('close-menu-btn');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        btn.addEventListener('click', () => {
+            menu.classList.remove('translate-x-full');
+        });
+
+        closeBtn.addEventListener('click', () => {
+            menu.classList.add('translate-x-full');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('translate-x-full');
+            });
+        });
+
+        // --- Navbar Glass Effect on Scroll ---
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('mt-2');
+                navbar.classList.remove('mt-6');
+            } else {
+                navbar.classList.add('mt-6');
+                navbar.classList.remove('mt-2');
+            }
+        });
+        
+        // --- Scroll Control Widget Logic ---
+        const scrollUpBtn = document.getElementById('scroll-up');
+        const scrollDownBtn = document.getElementById('scroll-down');
+        const sections = document.querySelectorAll('section'); 
+
+        function updateScrollButtons() {
+            const currentScroll = window.scrollY;
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.body.scrollHeight;
+
+            if (scrollUpBtn) {
+                if (currentScroll > 300) {
+                    scrollUpBtn.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+                } else {
+                    scrollUpBtn.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+                }
+            }
+
+            if (scrollDownBtn) {
+                if (currentScroll + windowHeight >= documentHeight - 100) {
+                    scrollDownBtn.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+                } else {
+                    scrollDownBtn.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+                }
+            }
+        }
+
+        function scrollToNextSection() {
+            const currentScroll = window.scrollY + 100; 
+            for (const section of sections) {
+                if (section.offsetTop > currentScroll) {
+                    window.scrollTo({ top: section.offsetTop - 150, behavior: 'smooth' }); 
+                    return;
+                }
+            }
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+
+        function scrollToPrevSection() {
+            const currentScroll = window.scrollY - 100; 
+            for (let i = sections.length - 1; i >= 0; i--) {
+                if (sections[i].offsetTop < currentScroll) {
+                    window.scrollTo({ top: sections[i].offsetTop - 150, behavior: 'smooth' });
+                    return;
+                }
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.addEventListener('scroll', updateScrollButtons);
+        
+        if (scrollDownBtn) scrollDownBtn.addEventListener('click', scrollToNextSection);
+        if (scrollUpBtn) scrollUpBtn.addEventListener('click', scrollToPrevSection);
+        
+        updateScrollButtons();
+
+        // --- Custom Cursor Logic ---
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        const hoverables = document.querySelectorAll('.hoverable');
+
+        if (window.matchMedia("(pointer: fine)").matches) {
+            window.addEventListener('mousemove', (e) => {
+                const posX = e.clientX;
+                const posY = e.clientY;
+                cursorDot.style.left = `${posX}px`;
+                cursorDot.style.top = `${posY}px`;
+                cursorOutline.animate({
+                    left: `${posX}px`,
+                    top: `${posY}px`
+                }, { duration: 500, fill: "forwards" });
+            });
+            hoverables.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    document.body.classList.add('hovering');
+                });
+                el.addEventListener('mouseleave', () => {
+                    document.body.classList.remove('hovering');
+                });
+            });
+        }
+
+        // --- Scroll Reveal Animation ---
+        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+        document.querySelectorAll('.reveal').forEach(el => { observer.observe(el); });
+
+    </script>
+</body>
+</html>
