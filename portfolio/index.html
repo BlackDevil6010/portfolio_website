@@ -287,6 +287,7 @@
                     <a href="#home" class="nav-link-item px-6 py-2 text-base md:text-lg font-medium text-gray-400 hover:text-white hoverable" data-target="home">Home</a>
                     <a href="#projects" class="nav-link-item px-6 py-2 text-base md:text-lg font-medium text-gray-400 hover:text-white hoverable" data-target="projects">Projects</a>
                     <a href="#skills" class="nav-link-item px-6 py-2 text-base md:text-lg font-medium text-gray-400 hover:text-white hoverable" data-target="skills">Skills</a>
+                    <a href="#experience" class="nav-link-item px-6 py-2 text-base md:text-lg font-medium text-gray-400 hover:text-white hoverable" data-target="experience">Experience</a>
                     <a href="#about" class="nav-link-item px-6 py-2 text-base md:text-lg font-medium text-gray-400 hover:text-white hoverable" data-target="about">About</a>
                 </div>
 
@@ -315,6 +316,7 @@
             <a href="#home" class="text-3xl font-thin italic mobile-link hover:text-primary transition-colors">Home</a>
             <a href="#projects" class="text-3xl font-thin italic mobile-link hover:text-primary transition-colors">Projects</a>
             <a href="#skills" class="text-3xl font-thin italic mobile-link hover:text-primary transition-colors">Skills</a>
+            <a href="#experience" class="text-3xl font-thin italic mobile-link hover:text-primary transition-colors">Experience</a>
             <a href="#about" class="text-3xl font-thin italic mobile-link hover:text-primary transition-colors">About</a>
             <a href="#contact" class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary mobile-link">Let's Talk</a>
         </div>
@@ -341,6 +343,9 @@
                     <a href="#contact" class="px-10 py-5 border border-white/20 rounded-full font-bold text-lg text-center hover:bg-white/10 transition-colors hoverable">
                         Contact Me
                     </a>
+                    <a href="#" download class="px-10 py-5 border border-white/20 rounded-full font-bold text-lg text-center hover:bg-white/10 transition-colors hoverable flex items-center justify-center gap-2">
+                        Download CV <i class="fa-solid fa-download"></i>
+                    </a>
                 </div>
                 
                 <div class="mt-16 flex items-center gap-8 text-gray-400 reveal" style="transition-delay: 400ms;">
@@ -354,7 +359,7 @@
                 <div class="relative w-full aspect-square max-w-lg xl:max-w-2xl mx-auto">
                     <div class="absolute inset-0 bg-gradient-to-tr from-primary to-secondary rounded-full opacity-20 blur-3xl animate-pulse"></div>
                     <!-- Added onerror fallback -->
-                    <img src="a.jpeg"  alt="Yugesh Profile" class="relative w-full h-full object-cover rounded-2xl rotate-3 hover:rotate-0 transition-transform duration-700 border border-white/10 shadow-2xl shadow-primary/20">
+                    <img src="a.jpeg" onerror="this.src='https://ui-avatars.com/api/?name=Yugeswaran+D&background=0D8ABC&color=fff&size=500'" alt="Yugesh Profile" class="relative w-full h-full object-cover rounded-2xl rotate-3 hover:rotate-0 transition-transform duration-700 border border-white/10 shadow-2xl shadow-primary/20">
                     
                     <div class="absolute -bottom-8 -left-8 glass p-6 rounded-2xl border border-white/10 shadow-xl animate-bounce" style="animation-duration: 3s;">
                         <div class="flex items-center gap-4">
@@ -526,8 +531,131 @@
         </div>
     </section>
 
+    <!-- Experience & Certifications Section -->
+    <section id="experience" class="py-32 section-scroll relative bg-neutral-900/30">
+        <div class="container-constrained">
+            <div class="mb-20 text-center reveal">
+                <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">Experience & <br><span class="text-gradient">Certifications</span></h2>
+                <p class="text-gray-400 text-xl max-w-2xl mx-auto">My professional journey and credentials.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-16">
+                
+                <!-- Internships (Timeline) -->
+                <div class="reveal">
+                    <h3 class="text-3xl font-bold mb-10 flex items-center gap-3">
+                        <i class="fa-solid fa-briefcase text-primary"></i> Internships
+                    </h3>
+                    <div class="relative border-l border-white/10 ml-3 space-y-12 pl-12">
+                        <!-- Item 1 -->
+                        <div class="relative group">
+                            <span class="absolute -left-[53px] top-1 h-5 w-5 rounded-full border-2 border-primary bg-black group-hover:bg-primary transition-colors duration-300"></span>
+                            <div class="glass p-8 rounded-3xl border border-white/5 hover:bg-white/5 transition-all duration-300 hoverable">
+                                <span class="text-primary text-sm font-bold tracking-widest uppercase mb-2 block">Jan 2024 - Present</span>
+                                <h4 class="text-2xl font-bold mb-1">Frontend Developer Intern</h4>
+                                <p class="text-gray-400 mb-4">TechSolutions Inc.</p>
+                                <p class="text-gray-300 leading-relaxed">Developing responsive web interfaces using React.js and Tailwind CSS. Collaborating with UX designers to implement pixel-perfect designs.</p>
+                            </div>
+                        </div>
+
+                        <!-- Item 2 (New) -->
+                        <div class="relative group">
+                            <span class="absolute -left-[53px] top-1 h-5 w-5 rounded-full border-2 border-purple-500 bg-black group-hover:bg-purple-500 transition-colors duration-300"></span>
+                            <div class="glass p-8 rounded-3xl border border-white/5 hover:bg-white/5 transition-all duration-300 hoverable">
+                                <span class="text-purple-400 text-sm font-bold tracking-widest uppercase mb-2 block">Nov 2024 - Dec 2024</span>
+                                <h4 class="text-2xl font-bold mb-1">Software Engineer Intern</h4>
+                                <p class="text-gray-400 mb-4">JP Morgan</p>
+                                <p class="text-gray-300 leading-relaxed">Contributed to software development lifecycles, optimizing backend processes and enhancing system efficiency in a financial technology environment.</p>
+                            </div>
+                        </div>
+
+                        <!-- Item 3 -->
+                        <div class="relative group">
+                            <span class="absolute -left-[53px] top-1 h-5 w-5 rounded-full border-2 border-secondary bg-black group-hover:bg-secondary transition-colors duration-300"></span>
+                            <div class="glass p-8 rounded-3xl border border-white/5 hover:bg-white/5 transition-all duration-300 hoverable">
+                                <span class="text-secondary text-sm font-bold tracking-widest uppercase mb-2 block">Jun 2024 - Nov 2024</span>
+                                <h4 class="text-2xl font-bold mb-1">UI/UX Design Intern</h4>
+                                <p class="text-gray-400 mb-4">Creative Studio</p>
+                                <p class="text-gray-300 leading-relaxed">Designed user flows and wireframes for mobile applications. Conducted user research and usability testing to improve product experience.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certifications (Grid/List) -->
+                <div class="reveal" style="transition-delay: 200ms;">
+                    <h3 class="text-3xl font-bold mb-10 flex items-center gap-3">
+                        <i class="fa-solid fa-certificate text-secondary"></i> Certifications
+                    </h3>
+                    <div class="space-y-6">
+                        <!-- Cert 1 -->
+                        <div class="glass p-6 rounded-2xl border border-white/5 flex items-center gap-6 hover:bg-white/5 transition-all duration-300 hoverable group cursor-pointer hover:-translate-y-2">
+                            <div class="w-16 h-16 bg-blue-500/10 rounded-xl flex items-center justify-center text-blue-400 text-2xl group-hover:scale-110 transition-transform">
+                                <i class="fa-brands fa-meta"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold group-hover:text-blue-400 transition-colors">Meta Frontend Developer</h4>
+                                <p class="text-gray-400 text-sm">Coursera • 2024</p>
+                            </div>
+                            <i class="fa-solid fa-arrow-up-right-from-square ml-auto text-gray-500 group-hover:text-white transition-colors"></i>
+                        </div>
+                        
+                        <!-- Cert 2 -->
+                        <div class="glass p-6 rounded-2xl border border-white/5 flex items-center gap-6 hover:bg-white/5 transition-all duration-300 hoverable group cursor-pointer hover:-translate-y-2">
+                            <div class="w-16 h-16 bg-orange-500/10 rounded-xl flex items-center justify-center text-orange-400 text-2xl group-hover:scale-110 transition-transform">
+                                <i class="fa-brands fa-google"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold group-hover:text-orange-400 transition-colors">Google UX Design</h4>
+                                <p class="text-gray-400 text-sm">Google Career Certificates • 2024</p>
+                            </div>
+                            <i class="fa-solid fa-arrow-up-right-from-square ml-auto text-gray-500 group-hover:text-white transition-colors"></i>
+                        </div>
+
+                        <!-- Cert 3 -->
+                        <div class="glass p-6 rounded-2xl border border-white/5 flex items-center gap-6 hover:bg-white/5 transition-all duration-300 hoverable group cursor-pointer hover:-translate-y-2">
+                            <div class="w-16 h-16 bg-yellow-500/10 rounded-xl flex items-center justify-center text-yellow-400 text-2xl group-hover:scale-110 transition-transform">
+                                <i class="fa-brands fa-aws"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold group-hover:text-yellow-400 transition-colors">AWS Cloud Practitioner</h4>
+                                <p class="text-gray-400 text-sm">Amazon Web Services • 2024</p>
+                            </div>
+                            <i class="fa-solid fa-arrow-up-right-from-square ml-auto text-gray-500 group-hover:text-white transition-colors"></i>
+                        </div>
+
+                        <!-- Cert 4 (New) -->
+                        <div class="glass p-6 rounded-2xl border border-white/5 flex items-center gap-6 hover:bg-white/5 transition-all duration-300 hoverable group cursor-pointer hover:-translate-y-2">
+                            <div class="w-16 h-16 bg-yellow-500/10 rounded-xl flex items-center justify-center text-yellow-400 text-2xl group-hover:scale-110 transition-transform">
+                                <i class="fa-brands fa-aws"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold group-hover:text-yellow-400 transition-colors">Prompt Engineering</h4>
+                                <p class="text-gray-400 text-sm">Amazon Web Services • 2024</p>
+                            </div>
+                            <i class="fa-solid fa-arrow-up-right-from-square ml-auto text-gray-500 group-hover:text-white transition-colors"></i>
+                        </div>
+
+                        <!-- Cert 5 (New) -->
+                        <div class="glass p-6 rounded-2xl border border-white/5 flex items-center gap-6 hover:bg-white/5 transition-all duration-300 hoverable group cursor-pointer hover:-translate-y-2">
+                            <div class="w-16 h-16 bg-green-500/10 rounded-xl flex items-center justify-center text-green-400 text-2xl group-hover:scale-110 transition-transform">
+                                <i class="fa-brands fa-google"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold group-hover:text-green-400 transition-colors">Google Data Analytics</h4>
+                                <p class="text-gray-400 text-sm">Google • 2025</p>
+                            </div>
+                            <i class="fa-solid fa-arrow-up-right-from-square ml-auto text-gray-500 group-hover:text-white transition-colors"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     <!-- About Section -->
-    <section id="about" class="py-32 bg-neutral-900/30 section-scroll">
+    <section id="about" class="py-32 section-scroll">
         <div class="container-constrained">
             <div class="glass p-12 md:p-20 rounded-[3rem] border border-white/10 relative overflow-hidden reveal">
                 <div class="absolute -top-24 -right-24 w-80 h-80 bg-primary/30 rounded-full filter blur-[100px]"></div>
@@ -757,13 +885,17 @@
         const closeBtn = document.getElementById('close-menu-btn');
         const mobileLinks = document.querySelectorAll('.mobile-link');
 
-        btn.addEventListener('click', () => {
-            menu.classList.remove('translate-x-full');
-        });
+        if(btn) {
+            btn.addEventListener('click', () => {
+                menu.classList.remove('translate-x-full');
+            });
+        }
 
-        closeBtn.addEventListener('click', () => {
-            menu.classList.add('translate-x-full');
-        });
+        if(closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                menu.classList.add('translate-x-full');
+            });
+        }
 
         mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
