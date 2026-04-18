@@ -423,9 +423,9 @@
                     </div>
                 </a>
 
-                <div class="group project-card relative rounded-3xl overflow-hidden cursor-pointer hoverable reveal">
+                <a href="https://www.figma.com/design/sCTjozkLYh2vhz22zooTAy/creed-care-redesign?node-id=0-1&t=KQ6jhGYOkIQ3dRXe-1" target="_blank" class="group project-card relative rounded-3xl overflow-hidden cursor-pointer hoverable reveal block">
                     <div class="aspect-[4/3] overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=2000&auto=format&fit=crop" alt="Project 3" class="project-img w-full h-full object-cover transition-transform duration-700">
+                        <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=2000&auto=format&fit=crop" alt="Social Media Kit" class="project-img w-full h-full object-cover transition-transform duration-700">
                     </div>
                     <div class="project-overlay absolute inset-0 bg-black/80 opacity-0 transition-opacity duration-300 flex flex-col justify-end p-12">
                         <h3 class="text-3xl font-bold mb-3 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Social Media Kit</h3>
@@ -435,25 +435,23 @@
                             <span class="text-sm border border-white/20 px-4 py-1.5 rounded-full">UI/UX</span>
                         </div>
                     </div>
-                </div>
+                </a>
 
+                <!-- Fixed the nested anchor/div structure here and replaced the missing local screenshot with a nice placeholder -->
                 <a href="https://my-logic.vercel.app/" target="_blank" class="group project-card relative rounded-3xl overflow-hidden cursor-pointer hoverable reveal block">
-                <div class="group project-card relative rounded-3xl overflow-hidden cursor-pointer hoverable reveal">
                     <div class="aspect-[4/3] overflow-hidden">
-                        <img src="Screenshot.png" alt="Project 4" class="project-img w-full h-full object-cover transition-transform duration-700">
+                        <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=2000&auto=format&fit=crop" alt="MY-LogiC Project" class="project-img w-full h-full object-cover transition-transform duration-700">
                     </div>
                     <div class="project-overlay absolute inset-0 bg-black/80 opacity-0 transition-opacity duration-300 flex flex-col justify-end p-12">
                         <h3 class="text-3xl font-bold mb-3 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">MY-LogiC</h3>
                         <p class="text-gray-300 text-lg mb-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">Contract Clause Extraction and Risk Analysis System</p>
-                        <div class="flex gap-3 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">
-                            <span class="text-sm border border-white/20 px-4 py-1.5 rounded-full">HTML CSS JS</span>
-                            <span class="text-sm border border-white/20 px-4 py-1.5 rounded-full">Python</span>
-                            <span class="text-sm border border-white/20 px-4 py-1.5 rounded-full">NLP</span>
-                            <span class="text-sm border border-white/20 px-4 py-1.5 rounded-full">Postresql</span>
-                            <span class="text-sm border border-white/20 px-4 py-1.5 rounded-full">Transformers from LegalBert</span>
+                        <div class="flex flex-wrap gap-3 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">
+                            <span class="text-sm border border-white/20 px-4 py-1.5 rounded-full mb-2">HTML CSS JS</span>
+                            <span class="text-sm border border-white/20 px-4 py-1.5 rounded-full mb-2">Python</span>
+                            <span class="text-sm border border-white/20 px-4 py-1.5 rounded-full mb-2">NLP</span>
+                            <span class="text-sm border border-white/20 px-4 py-1.5 rounded-full mb-2">Postgresql</span>
                         </div>
                     </div>
-                </div>
                 </a>
             </div>
         </div>
@@ -560,7 +558,8 @@
                         <i class="fa-solid fa-certificate text-secondary"></i> Certifications
                     </h3>
                     <div class="space-y-6">
-                        <div class="glass p-6 rounded-2xl border border-white/5 flex items-center gap-6 hover:bg-white/5 transition-all duration-300 hoverable group hover:-translate-y-2">
+                        <!-- Added onClick events to trigger the custom modal with placeholder generic certificates -->
+                        <div onclick="openCertModal('Meta Frontend Developer', 'https://images.unsplash.com/photo-1523289201986-89620525287e?q=80&w=1200&auto=format&fit=crop')" class="glass p-6 rounded-2xl border border-white/5 flex items-center gap-6 hover:bg-white/5 transition-all duration-300 hoverable group hover:-translate-y-2 cursor-pointer">
                             <div class="w-16 h-16 bg-blue-500/10 rounded-xl flex items-center justify-center text-blue-400 text-2xl group-hover:scale-110 transition-transform">
                                 <i class="fa-brands fa-meta"></i>
                             </div>
@@ -570,7 +569,7 @@
                             </div>
                         </div>
                         
-                        <div class="glass p-6 rounded-2xl border border-white/5 flex items-center gap-6 hover:bg-white/5 transition-all duration-300 hoverable group hover:-translate-y-2">
+                        <div onclick="openCertModal('Google UX Design', 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?q=80&w=1200&auto=format&fit=crop')" class="glass p-6 rounded-2xl border border-white/5 flex items-center gap-6 hover:bg-white/5 transition-all duration-300 hoverable group hover:-translate-y-2 cursor-pointer">
                             <div class="w-16 h-16 bg-orange-500/10 rounded-xl flex items-center justify-center text-orange-400 text-2xl group-hover:scale-110 transition-transform">
                                 <i class="fa-brands fa-google"></i>
                             </div>
@@ -580,7 +579,7 @@
                             </div>
                         </div>
 
-                        <div class="glass p-6 rounded-2xl border border-white/5 flex items-center gap-6 hover:bg-white/5 transition-all duration-300 hoverable group hover:-translate-y-2">
+                        <div onclick="openCertModal('AWS Cloud Practitioner', 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop')" class="glass p-6 rounded-2xl border border-white/5 flex items-center gap-6 hover:bg-white/5 transition-all duration-300 hoverable group hover:-translate-y-2 cursor-pointer">
                             <div class="w-16 h-16 bg-yellow-500/10 rounded-xl flex items-center justify-center text-yellow-400 text-2xl group-hover:scale-110 transition-transform">
                                 <i class="fa-brands fa-aws"></i>
                             </div>
@@ -590,7 +589,7 @@
                             </div>
                         </div>
 
-                        <div class="glass p-6 rounded-2xl border border-white/5 flex items-center gap-6 hover:bg-white/5 transition-all duration-300 hoverable group hover:-translate-y-2">
+                        <div onclick="openCertModal('Prompt Engineering', 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1200&auto=format&fit=crop')" class="glass p-6 rounded-2xl border border-white/5 flex items-center gap-6 hover:bg-white/5 transition-all duration-300 hoverable group hover:-translate-y-2 cursor-pointer">
                             <div class="w-16 h-16 bg-yellow-500/10 rounded-xl flex items-center justify-center text-yellow-400 text-2xl group-hover:scale-110 transition-transform">
                                 <i class="fa-brands fa-aws"></i>
                             </div>
@@ -600,7 +599,7 @@
                             </div>
                         </div>
 
-                        <div class="glass p-6 rounded-2xl border border-white/5 flex items-center gap-6 hover:bg-white/5 transition-all duration-300 hoverable group hover:-translate-y-2">
+                        <div onclick="openCertModal('Google Data Analytics', 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop')" class="glass p-6 rounded-2xl border border-white/5 flex items-center gap-6 hover:bg-white/5 transition-all duration-300 hoverable group hover:-translate-y-2 cursor-pointer">
                             <div class="w-16 h-16 bg-green-500/10 rounded-xl flex items-center justify-center text-green-400 text-2xl group-hover:scale-110 transition-transform">
                                 <i class="fa-brands fa-google"></i>
                             </div>
@@ -759,7 +758,7 @@
 
     <div id="cert-modal" class="fixed inset-0 z-[10001] hidden flex items-center justify-center bg-black/90 backdrop-blur-md opacity-0 transition-opacity duration-300" onclick="closeCertModal()">
         <div class="relative max-w-4xl w-full mx-4" onclick="event.stopPropagation()">
-            <button class="absolute -top-12 right-0 text-white text-3xl hover:text-primary transition-colors" onclick="closeCertModal()">
+            <button class="absolute -top-12 right-0 text-white text-3xl hover:text-primary transition-colors cursor-pointer" onclick="closeCertModal()">
                 <i class="fa-solid fa-xmark"></i>
             </button>
             <div class="glass p-2 rounded-2xl border border-white/10 overflow-hidden">
